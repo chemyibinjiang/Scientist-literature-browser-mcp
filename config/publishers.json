@@ -1,0 +1,391 @@
+{
+  "schema": "scientist-literature-publisher-policy/v1",
+  "review": {
+    "status": "review_required",
+    "reviewed_by": "",
+    "reviewed_at": "",
+    "scope": "Review this policy for the institution and host before use",
+    "review_required_after_edit": true,
+    "approved_policy_sha256": ""
+  },
+  "challenge_solver": {
+    "enabled": true,
+    "provider": "flaresolverr",
+    "activation": "after_browser_challenge_or_empty_publisher_shell",
+    "result_use": "same_profile_handoff_only"
+  },
+  "session_handoff": {
+    "enabled": true,
+    "source": "flaresolverr",
+    "destination": "same_profile",
+    "scope": "same_publisher",
+    "browser_version_match": "required",
+    "persistence": "memory_only",
+    "cookie_export": "deny"
+  },
+  "publishers": [
+    {
+      "id": "doi-resolver",
+      "display_name": "DOI resolver",
+      "enabled": true,
+      "domains": [
+        "doi.org"
+      ],
+      "challenge_solver": false,
+      "pdf_fetch": false
+    },
+    {
+      "id": "xmu-campus",
+      "display_name": "Xiamen University campus access",
+      "enabled": true,
+      "domains": [
+        "xmu.edu.cn"
+      ],
+      "challenge_solver": false,
+      "pdf_fetch": false
+    },
+    {
+      "id": "acs",
+      "display_name": "ACS Publications",
+      "enabled": true,
+      "domains": [
+        "acs.org",
+        "figshare.com",
+        "acs.silverchair-cdn.com"
+      ],
+      "challenge_solver": true,
+      "pdf_fetch": true
+    },
+    {
+      "id": "rsc",
+      "display_name": "Royal Society of Chemistry",
+      "enabled": true,
+      "domains": [
+        "rsc.org",
+        "rscj.silverchair-cdn.com"
+      ],
+      "challenge_solver": true,
+      "pdf_fetch": true
+    },
+    {
+      "id": "nature-springer",
+      "display_name": "Nature and Springer",
+      "enabled": true,
+      "domains": [
+        "nature.com",
+        "springer.com",
+        "springernature.com"
+      ],
+      "challenge_solver": true,
+      "pdf_fetch": true
+    },
+    {
+      "id": "elsevier",
+      "display_name": "Elsevier and ScienceDirect",
+      "enabled": true,
+      "domains": [
+        "sciencedirect.com",
+        "sciencedirectassets.com",
+        "els-cdn.com",
+        "elsevier.com",
+        "elsevier.io"
+      ],
+      "challenge_solver": false,
+      "pdf_fetch": false
+    },
+    {
+      "id": "wiley",
+      "display_name": "Wiley and Angewandte Chemie",
+      "enabled": true,
+      "domains": [
+        "wiley.com"
+      ],
+      "challenge_solver": true,
+      "pdf_fetch": true
+    },
+    {
+      "id": "science",
+      "display_name": "Science",
+      "enabled": true,
+      "domains": [
+        "science.org"
+      ],
+      "challenge_solver": true,
+      "pdf_fetch": true
+    },
+    {
+      "id": "pnas",
+      "display_name": "PNAS",
+      "enabled": true,
+      "domains": [
+        "pnas.org"
+      ],
+      "challenge_solver": true,
+      "pdf_fetch": true
+    },
+    {
+      "id": "iucr",
+      "display_name": "International Union of Crystallography",
+      "enabled": true,
+      "domains": [
+        "iucr.org"
+      ],
+      "challenge_solver": false,
+      "pdf_fetch": true
+    },
+    {
+      "id": "mdpi",
+      "display_name": "MDPI",
+      "enabled": true,
+      "domains": [
+        "mdpi.com"
+      ],
+      "challenge_solver": false,
+      "pdf_fetch": true
+    },
+    {
+      "id": "degruyter",
+      "display_name": "De Gruyter Brill",
+      "enabled": true,
+      "domains": [
+        "degruyter.com",
+        "degruyterbrill.com"
+      ],
+      "challenge_solver": false,
+      "pdf_fetch": true
+    },
+    {
+      "id": "thieme",
+      "display_name": "Thieme",
+      "enabled": true,
+      "domains": [
+        "thieme-chemistry.com",
+        "thieme-connect.de"
+      ],
+      "challenge_solver": false,
+      "pdf_fetch": true
+    },
+    {
+      "id": "other-publishers",
+      "display_name": "Other reviewed scholarly publishers",
+      "enabled": true,
+      "domains": [
+        "tandfonline.com",
+        "ieee.org",
+        "aip.org",
+        "aps.org",
+        "oup.com",
+        "cambridge.org",
+        "sagepub.com",
+        "cell.com"
+      ],
+      "challenge_solver": false,
+      "pdf_fetch": true
+    },
+    {
+      "id": "indexes",
+      "display_name": "Reviewed literature indexes",
+      "enabled": true,
+      "domains": [
+        "webofscience.com",
+        "clarivate.com",
+        "scopus.com",
+        "jstor.org",
+        "cnki.net",
+        "wanfangdata.com.cn"
+      ],
+      "challenge_solver": false,
+      "pdf_fetch": false
+    },
+    {
+      "id": "open-repositories",
+      "display_name": "Reviewed open scholarly repositories",
+      "enabled": true,
+      "domains": [
+        "ebi.ac.uk",
+        "researchsquare.com",
+        "ssrn.com",
+        "chemrxiv.org",
+        "arxiv.org",
+        "zenodo.org",
+        "berkeley.edu",
+        "scholarsmine.mst.edu"
+      ],
+      "challenge_solver": false,
+      "pdf_fetch": true
+    },
+    {
+      "id": "xmu-library-resources",
+      "display_name": "XMU Library reviewed database resources",
+      "enabled": true,
+      "domains": [
+        "51sjsj.com",
+        "52met.com",
+        "acm.org",
+        "agu.org",
+        "aiaa.org",
+        "airitilibrary.cn",
+        "amdigital.co.uk",
+        "ams.org",
+        "anatomy.tv",
+        "ancientbooks.cn",
+        "annualreviews.org",
+        "asahi.com",
+        "ascelibrary.org",
+        "asm.org",
+        "bbtpress.com",
+        "bioone.org",
+        "bmj.com",
+        "bohrium.com",
+        "bookan.com.cn",
+        "brillonline.com",
+        "caixin.com",
+        "cas.org",
+        "cctpbooks.com",
+        "ceicdata.com.cn",
+        "chaoxing.com",
+        "chinacases.org",
+        "chinaxiv.org",
+        "chineseall.cn",
+        "cipread.cn",
+        "cmpbook.com",
+        "cnbksy.com",
+        "cnbksy.net",
+        "cnopendata.com",
+        "cnpereading.com",
+        "cnrds.com",
+        "codp.com.cn",
+        "com.tw",
+        "core.ac.uk",
+        "cscd.ac.cn",
+        "csmar.com",
+        "ctext.org",
+        "customskb.com",
+        "cxstar.com",
+        "duxiu.com",
+        "ebsco.com",
+        "ebscohost.com",
+        "elib.link",
+        "elibrary.ru",
+        "emerald.com",
+        "engineeringvillage.com",
+        "epsnet.com.cn",
+        "ersjk.com",
+        "eurekaselect.com",
+        "fenqubiao.com",
+        "fiz-karlsruhe.de",
+        "gale.com",
+        "galegroup.com",
+        "global-sci.org",
+        "heinonline.org",
+        "hep.com.cn",
+        "hnlat.com",
+        "hwshu.com",
+        "iareporter.com",
+        "ibfd.org",
+        "igpublish.com.cn",
+        "ilawpress.com",
+        "investorstatelawguide.com",
+        "iop.org",
+        "ipmph.com",
+        "iresearchbook.cn",
+        "itextbook.cn",
+        "jd.com",
+        "jhu.edu",
+        "jove.com",
+        "jusmundi.com",
+        "keledge.com",
+        "kluwerarbitration.com",
+        "kluwerlawonline.com",
+        "lawdata01.com.cn",
+        "lexis.com",
+        "libtop.com",
+        "lilun.cn",
+        "msp.org",
+        "myu100.com",
+        "ncpssd.cn",
+        "nih.gov",
+        "nju.edu.cn",
+        "nlcpress.com",
+        "nstl.gov.cn",
+        "oarl.org.cn",
+        "oecd-ilibrary.org",
+        "optica.org",
+        "ovid.com",
+        "paper.edu.cn",
+        "patsea.com",
+        "patyee.com",
+        "people.com.cn",
+        "pishu.com.cn",
+        "pkulaw.com",
+        "pqdtcn.com",
+        "princeton.edu",
+        "projecteuclid.org",
+        "proquest.com",
+        "ptpress.cn",
+        "pubscholar.cn",
+        "rdfybk.com",
+        "rdyc.cn",
+        "redclass.net",
+        "resset.cn",
+        "resset.com",
+        "rulib.cn",
+        "rymusic.art",
+        "sciencereading.cn",
+        "scivideoindex.com",
+        "shangankaogong.net",
+        "shangankaoyan.net",
+        "shidianguji.com",
+        "siam.org",
+        "sklib.cn",
+        "spiedigitallibrary.org",
+        "spiedl.org",
+        "ssap.com.cn",
+        "sslibrary.com",
+        "sunwayinfo.com.cn",
+        "superlib.com",
+        "taylorandfrancis.com",
+        "taylorfrancis.com",
+        "thomsonreuters.com",
+        "tickdata.com",
+        "tongxianghuicn.com",
+        "uchicago.edu",
+        "udndata.com",
+        "un.org",
+        "unihan.com.cn",
+        "upenn.edu",
+        "wbsjk.com",
+        "wind.com.cn",
+        "wkinfo.com.cn",
+        "worldbank.org",
+        "worldlibrary.ai",
+        "worldscientific.com",
+        "xmulib.org",
+        "xxsuyang.com",
+        "yiigle.com",
+        "zhangyue.com",
+        "zhihuiya.com",
+        "zhiyuebook.com",
+        "zxhnzq.com"
+      ],
+      "challenge_solver": false,
+      "pdf_fetch": false
+    },
+    {
+      "id": "xmu-library-access-helpers",
+      "display_name": "XMU Library authentication and access helpers",
+      "enabled": true,
+      "domains": [
+        "carsi.edu.cn",
+        "eurekaselect.net",
+        "igpublish.com",
+        "liblynx.com",
+        "openathens.net",
+        "sams-sigma.com",
+        "webofknowledge.com"
+      ],
+      "challenge_solver": false,
+      "pdf_fetch": false
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+ARG CHROMIUM_IMAGE=ghcr.io/flaresolverr/flaresolverr@sha256:139dfee1c6f89249c8d665d1333a42e8ec74ec0a86bc6bb1c8461e10d3a66a47
+FROM ${CHROMIUM_IMAGE}
+
+ARG PLAYWRIGHT_VERSION=1.58.0
+
+ENV LANG=C.UTF-8 \
+    LC_ALL=C.UTF-8 \
+    PYTHONUTF8=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    HOME=/tmp/browser-home \
+    XDG_CACHE_HOME=/tmp/browser-cache \
+    LITERATURE_BROWSER_CHROMIUM=/usr/bin/chromium \
+    LITERATURE_ENGINE_PROFILE_ROOT=/browser-profiles
+
+USER root
+
+RUN apt-get -o Acquire::Retries=5 update \
+    && apt-get -o Acquire::Retries=5 install -y --no-install-recommends \
+        dbus-x11 \
+        fonts-noto-cjk \
+        openbox \
+        x11-utils \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN python3 -m pip install --no-cache-dir \
+        "beautifulsoup4==4.14.3" \
+        "pillow==12.1.1" \
+        "playwright==${PLAYWRIGHT_VERSION}" \
+        "pypdf==6.14.2" \
+        "pypdfium2==4.30.0"
+
+RUN useradd --uid 10001 --create-home --shell /usr/sbin/nologin browser \
+    && mkdir -p /app /browser-profiles \
+    && chown -R browser:browser /app /browser-profiles
+
+COPY browser/literature_browser.py /app/literature_browser.py
+COPY browser/literature_browser_engine.py /app/literature_browser_engine.py
+COPY browser/engine_launcher.py /app/engine_launcher.py
+COPY src/scientist_literature_mcp/publisher_policy.py /app/publisher_policy.py
+COPY browser/literature_engine_entrypoint.sh \
+    /usr/local/bin/literature-engine-entrypoint
+
+RUN chmod 0755 /usr/local/bin/literature-engine-entrypoint
+
+USER browser
+WORKDIR /app
+
+EXPOSE 9020
+
+ENTRYPOINT ["/usr/bin/dumb-init", "--"]
+CMD ["python3", "/app/engine_launcher.py"]

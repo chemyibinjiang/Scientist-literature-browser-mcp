@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "scientist-literature-browser-mcp"
+version = "0.9.9"
+description = "Governed campus literature browser exposed through MCP"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "mcp==2.0.0",
+]
+
+[project.optional-dependencies]
+test = [
+  "pytest>=8,<9",
+]
+
+[project.scripts]
+scientist-literature-mcp = "scientist_literature_mcp.server:main"
+scientist-literature-monitor = "scientist_literature_mcp.monitor:main"
+scientist-literature-policy = "scientist_literature_mcp.publisher_policy:main"
+scientist-research-gateway = "scientist_literature_mcp.http_gateway:main"
+scientist-literature-router = "scientist_literature_mcp.browser_router:main"
+scientist-research-keys = "scientist_literature_mcp.api_keys:main"
+scientist-literature-profile-patrol = "scientist_literature_mcp.maintenance.profile_patrol:main"
+scientist-literature-profile-repair = "scientist_literature_mcp.maintenance.profile_repair:main"
+scientist-literature-profile-fleet = "scientist_literature_mcp.maintenance.profile_fleet:main"
+scientist-literature-auto-maintainer = "scientist_literature_mcp.maintenance.auto_maintainer:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

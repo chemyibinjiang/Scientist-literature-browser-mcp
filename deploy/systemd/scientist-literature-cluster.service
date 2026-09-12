@@ -1,0 +1,21 @@
+[Unit]
+Description=Scientist literature browser cluster
+Requires=docker.service
+After=docker.service network-online.target
+Wants=network-online.target
+Wants=scientist-literature-firewall.service
+After=scientist-literature-firewall.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+WorkingDirectory=/opt/scientist-literature/current
+ExecStartPre=/usr/bin/docker compose --env-file /etc/scientist-literature/cluster.env -f docker-compose.cluster.yml config --quiet
+ExecStart=/usr/bin/docker compose --env-file /etc/scientist-literature/cluster.env -f docker-compose.cluster.yml up -d --remove-orphans
+ExecReload=/usr/bin/docker compose --env-file /etc/scientist-literature/cluster.env -f docker-compose.cluster.yml up -d --remove-orphans
+ExecStop=/usr/bin/docker compose --env-file /etc/scientist-literature/cluster.env -f docker-compose.cluster.yml stop
+TimeoutStartSec=3600
+TimeoutStopSec=180
+
+[Install]
+WantedBy=multi-user.target

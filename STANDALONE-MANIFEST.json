@@ -1,0 +1,305 @@
+{
+  "schema": "scientist-literature-standalone-manifest/v1",
+  "name": "scientist-literature-browser-mcp",
+  "version": "0.9.9",
+  "source_commit": "23ac4d10e8ac92863c54a95d48111bfdd9448449",
+  "policy_review_required": true,
+  "files": [
+    {
+      "path": ".dockerignore",
+      "sha256": "5749d48d84104e3a0c6ee0419909e3b553183d8202f95531da6af0a989038209"
+    },
+    {
+      "path": ".env.example",
+      "sha256": "c99b358391ed81c468c44288e861647d30ec49d6f8d0c1f38d5181da18c65614"
+    },
+    {
+      "path": ".github/workflows/ci.yml",
+      "sha256": "3e3ec87e432ef18280f2eed53740ce4b4760862eee6c274a1af0678c112ce94f"
+    },
+    {
+      "path": ".gitignore",
+      "sha256": "31e24082667c8d39cbca9e08eb723ba810b3b6dd4ad01d934a5cbc9525b41eaa"
+    },
+    {
+      "path": "AGENT_USAGE.md",
+      "sha256": "a4cd3ce3c6f316f1a4875b7d0d0862117452f219846e8d106637368e0150f915"
+    },
+    {
+      "path": "Dockerfile.browser",
+      "sha256": "a60d04d9206fd45357f96ecf967157c2d6e4aaf1eeb2a77278f065205a63e368"
+    },
+    {
+      "path": "Dockerfile.engine",
+      "sha256": "fc6cb02d334b9abea6e27695b55f2373af3aa4371cdfce6e0e6f30a6053b9a37"
+    },
+    {
+      "path": "Dockerfile.flaresolverr",
+      "sha256": "65ea6199f946a735b73243c6fabf1540c39a5800b454bfa37ae5183baf31799c"
+    },
+    {
+      "path": "Dockerfile.mcp",
+      "sha256": "63ff2a7d37d1ce619f0cca10adb78fc011fba6f214fedce7eee116d30584edcc"
+    },
+    {
+      "path": "README.md",
+      "sha256": "29636956d5f70272ca9c52059e04dc66ffde46f02fae7de30b8d038913e1bb68"
+    },
+    {
+      "path": "SECURITY.md",
+      "sha256": "cffc583df70d3d4fef7d304c0533badb3c0a85fcb53a66213188d796745da6e4"
+    },
+    {
+      "path": "STANDALONE.md",
+      "sha256": "578d534ed640c7b364b78877b3f886ba075d4ab5f1b92bf1af613c02a8d4918f"
+    },
+    {
+      "path": "THIRD_PARTY_NOTICES.md",
+      "sha256": "51440743f21e01a66acf30026ba84b8cb065bd64543be378a73f95a33c54d77d"
+    },
+    {
+      "path": "browser/browser_launcher.py",
+      "sha256": "f5f0165f693388c6fa24842cf9175a92f0b939300e02d481869d383528ac1956"
+    },
+    {
+      "path": "browser/engine_launcher.py",
+      "sha256": "f4404db7c49d1fe286d06aa0a8ea3485c5a39849983c5f63a315563f27c1bfa6"
+    },
+    {
+      "path": "browser/literature_browser.py",
+      "sha256": "85ffb3c77e2f22661d50b9acbd63e4646e3114ce359e154ff629666e1f932ba7"
+    },
+    {
+      "path": "browser/literature_browser_engine.py",
+      "sha256": "f6edc733876a3b28f255bf0599fec2dd4bdf2f95ae5a4a1c6199da203506ab6c"
+    },
+    {
+      "path": "browser/literature_engine_entrypoint.sh",
+      "sha256": "5196af1dfd300c8c9a50a28312654534b7099a2dd47fece50b679ca4527d43a3"
+    },
+    {
+      "path": "browser/literature_headed_entrypoint.sh",
+      "sha256": "aba8c4136514a0a87368ff337a11e81f29a0af8b131175e900c5d9c74b180c78"
+    },
+    {
+      "path": "client/README.md",
+      "sha256": "f8d4c32a65963f68c140e3ca0b0c4de7f1ba27bfc5eb5c86599bc61614710465"
+    },
+    {
+      "path": "client/README.zh-CN.md",
+      "sha256": "1e0c545a30c7a3a41c1d6c8bec993053daed1fa30aa3e34df07e61dbbd8c2f55"
+    },
+    {
+      "path": "codex.config.example.toml",
+      "sha256": "c9d9e916c1c2ee3c80b34c1c856f1accd3700aec47decbba91314f45a96a6e14"
+    },
+    {
+      "path": "codex.remote.config.example.toml",
+      "sha256": "29525ea739a2fc521ba86f12ead921670c4c79f56b26ef1e85ff8e9d18bb9492"
+    },
+    {
+      "path": "config/clash-direct-rules.example.yaml",
+      "sha256": "b3152f8bd736984a528f53c8a28f88ab63d0772fd2e05a4bb068529e0f81f0bd"
+    },
+    {
+      "path": "config/probes.json",
+      "sha256": "70b9f72571a7743f6449dfc38e464e7b66b223facac355491b60af85a68cb88c"
+    },
+    {
+      "path": "config/profile-fleet-b.example.json",
+      "sha256": "7221ab22b7de815362cb581443a329758f622c8bb42d3247d1744a89e1e1743b"
+    },
+    {
+      "path": "config/profile-fleet.example.json",
+      "sha256": "6c67805737828ddec172d7667e4de767bfde6d47788d1a7aa729afbaa774e3cb"
+    },
+    {
+      "path": "config/publishers.json",
+      "sha256": "cbb5474af1eb46615d2cffcf048d25ef75ce6516f684c4a0c0147a7e42c08529"
+    },
+    {
+      "path": "config/research-gateway-keys.example.json",
+      "sha256": "2d31059c6e85bd1874bb42727239d7945d6bd226b3f1cf520085d8385e89c4f1"
+    },
+    {
+      "path": "config/rsc-keep-warm.example.json",
+      "sha256": "e324a994eb3b591b14260853d29a9b4e959a6461fbb652296a345107333deb74"
+    },
+    {
+      "path": "config/supplementary-fallbacks.json",
+      "sha256": "ccad34edd4f420a75f9515eeb2d32a05af8d7ff3b9569f213e7af4dbece18d3a"
+    },
+    {
+      "path": "deploy/README.md",
+      "sha256": "49f9624f6710ebad79d5a38577b34b9ccf6b1b35990052c2e9c9c65738d44665"
+    },
+    {
+      "path": "deploy/flaresolverr/patch_v350_turnstile_stale.py",
+      "sha256": "daeb255401dc67b58c58dd364317717a919ccaed6c746c71d9d77ab66a009df1"
+    },
+    {
+      "path": "deploy/scientist-literature-firewall.sh",
+      "sha256": "8752ff05d73abe1fb9845e6d5e2e6f92ba834f2640fc4d6f93d6f508a04d3c3f"
+    },
+    {
+      "path": "deploy/systemd/scientist-literature-browser-router.service",
+      "sha256": "fc845537af921bfb006c801a9fe517127936bfba436c9e1c9e2397e13dbe3e38"
+    },
+    {
+      "path": "deploy/systemd/scientist-literature-cluster.service",
+      "sha256": "7502b610ab076100e0967915ff41b41453b0681fd0ac6d84fc0e6fda5ef3c7bc"
+    },
+    {
+      "path": "deploy/systemd/scientist-literature-firewall.service",
+      "sha256": "02f3fc03b848a88266c4ab4c24bc24fdf07c45f88bd390c64eeb70bcae1bba41"
+    },
+    {
+      "path": "deploy/systemd/scientist-literature-profile-fleet.service",
+      "sha256": "cc37c72837d65c1a490d8cab09c6a0630bc45a0351ced9d2023c87ddd92725d1"
+    },
+    {
+      "path": "deploy/systemd/scientist-literature-profile-fleet@.service",
+      "sha256": "1e18d9d1a2fd6cd410a8ff3c252bca70f40dc1b60d407344bfadba0c0f936bc5"
+    },
+    {
+      "path": "deploy/systemd/scientist-literature-profile-patrol@.service",
+      "sha256": "5c21ddb26cd83e70ea4f2f669c28b880898660cbaa3aa4e9c238a8690b8af47b"
+    },
+    {
+      "path": "deploy/systemd/scientist-literature-profile-repair.service",
+      "sha256": "b1aa5ac1fbdff85df1c3f5989f98c11dc6e2b043ed19f85dc215ad0ffc9260d1"
+    },
+    {
+      "path": "deploy/systemd/scientist-literature-profile-repair.timer",
+      "sha256": "7f7ce3f4b23b1bb4551862c043516f8844c7d8f7862faf358bbb776fe52eaba8"
+    },
+    {
+      "path": "deploy/systemd/scientist-literature-rsc-keep-warm@.service",
+      "sha256": "fa13cd7e62f88d465194aaade2bcc5a69c5e1aa4b33fecccace8377c6b04bfbe"
+    },
+    {
+      "path": "docker-compose.cluster.yml",
+      "sha256": "489f1d00245bc05ed401498987cf8a97cf1d9d344f391fe8f8907e75f55827b9"
+    },
+    {
+      "path": "docker-compose.yml",
+      "sha256": "8c668958033f7f2f4fc83365c7f5261e13522e521c6eed8075e335866d6e9123"
+    },
+    {
+      "path": "pyproject.toml",
+      "sha256": "2b9985c13d1cf2c1b8b278a8e4f524f67ce3eac2ddb56212aa5aec6d1afe625b"
+    },
+    {
+      "path": "scripts/approve-policy.ps1",
+      "sha256": "049d3bdedb79945f8d25629aef506784052ee39b98d6199c5ef3773ed0b23c3b"
+    },
+    {
+      "path": "scripts/approve-policy.sh",
+      "sha256": "95fa8868c3d7ccc7aace6c65cd37d55d7aa9dd8ada563e2ba341a599f2c43139"
+    },
+    {
+      "path": "scripts/diagnose_flaresolverr_session.py",
+      "sha256": "14071c4b4591c07a1baaf39e931e14b9806ab22419a4ff62be23e917b889b80c"
+    },
+    {
+      "path": "scripts/register-codex.ps1",
+      "sha256": "1a44c60094d3cb2c4daa796fe2e303d73dee9b6840e59123c1789c37b93f0f2c"
+    },
+    {
+      "path": "scripts/register-codex.sh",
+      "sha256": "aaf93543301e55c8663f62f689afd6925b4ab8de83394de6e8c6dcf221471d4f"
+    },
+    {
+      "path": "scripts/smoke_rsc_edge.py",
+      "sha256": "21e4579bfe7f4166623b70f62d50ee86613dac76b9df136be2fbd78caf9de065"
+    },
+    {
+      "path": "scripts/start.ps1",
+      "sha256": "64ce25347faf55a77d07ea37911603f6c35b5690cf5228f27c242b92b550986a"
+    },
+    {
+      "path": "scripts/start.sh",
+      "sha256": "6faea23c788b1dce2d23255a577fcb5135c36aa501b5bfe4dc3e5fef97eae9fe"
+    },
+    {
+      "path": "scripts/stop.ps1",
+      "sha256": "2ada5403a2cb2dde0e9bda3869fd3f81a363365d9a211f9b9315bfcdbbee1896"
+    },
+    {
+      "path": "scripts/stop.sh",
+      "sha256": "5bdb8f8e7725b132b8f112e568743b7a0e5daf4e9d74d28d489231d3133d52bb"
+    },
+    {
+      "path": "src/scientist_literature_mcp/__init__.py",
+      "sha256": "7f8aa121c2a0db5f089e0492ed0132a39c6c0ff4951b3e8e1f29f6bc4febe29c"
+    },
+    {
+      "path": "src/scientist_literature_mcp/api_keys.py",
+      "sha256": "c0d7e86b80ee206133bf0e72efd12a5a9317b7fd7eba06b1d9a97d765bd380db"
+    },
+    {
+      "path": "src/scientist_literature_mcp/browser_client.py",
+      "sha256": "aeda900328aacf8c9177b60124cf15acc9838f6eb78c5b3316194ed153bf9e56"
+    },
+    {
+      "path": "src/scientist_literature_mcp/browser_pool.py",
+      "sha256": "7cd1be51bdd7d158a52cf3a3ce360c8812454237c6a2cd937d6187cb7ff1bdd6"
+    },
+    {
+      "path": "src/scientist_literature_mcp/browser_router.py",
+      "sha256": "7854973cb47e6a33552a50d5987f8a5824727111d24774e756aa1675bc7dd3fa"
+    },
+    {
+      "path": "src/scientist_literature_mcp/http_gateway.py",
+      "sha256": "95a5e4e4b15f9a5456e99a0aa1b60c10fd99b3426aad56016a94715d5d7dc97b"
+    },
+    {
+      "path": "src/scientist_literature_mcp/literature_browser_resources.py",
+      "sha256": "8b2b7ca9163c1b63bc88f082674f2c09c7256538485495601aaa7b908403bcd5"
+    },
+    {
+      "path": "src/scientist_literature_mcp/maintenance/__init__.py",
+      "sha256": "6873de4a6b2bb97e8105f96e744e28e8414c7d16a367a1f0a6bbaeee20a1c7de"
+    },
+    {
+      "path": "src/scientist_literature_mcp/maintenance/auto_maintainer.py",
+      "sha256": "09ed43fc8dbe21821e5c47cf02104d900e03eb34507262c7a2597fb1fb2f2294"
+    },
+    {
+      "path": "src/scientist_literature_mcp/maintenance/host.py",
+      "sha256": "9807363d369fb199d5af22e9c5a4a48cd1550119c8f512cc3cd7797cce9daa15"
+    },
+    {
+      "path": "src/scientist_literature_mcp/maintenance/profile_fleet.py",
+      "sha256": "58b1cd6e3ffc31ced8f171c6d875197bc363ff46863abc9e98467076bbdf72dc"
+    },
+    {
+      "path": "src/scientist_literature_mcp/maintenance/profile_patrol.py",
+      "sha256": "0d12e57a59ff038c741b69f29fb5a02f8a2540e678fa33998c44a7add7ec26ee"
+    },
+    {
+      "path": "src/scientist_literature_mcp/maintenance/profile_repair.py",
+      "sha256": "2da1c48478d1d8a3cd2732b5f7ad901f7579ecd95265c26b066c432f03cd40f6"
+    },
+    {
+      "path": "src/scientist_literature_mcp/monitor.py",
+      "sha256": "659393fb69b3c3de5f5369e1d1bc4d2b132ed61bddaabae5025ef993faa66a68"
+    },
+    {
+      "path": "src/scientist_literature_mcp/publisher_policy.py",
+      "sha256": "2be212ac36d8d67b214e3d7a4bbbbc73ab17b97836d1ea627a6ffa7fc597206d"
+    },
+    {
+      "path": "src/scientist_literature_mcp/server.py",
+      "sha256": "616fff933f4ca27bcdab436e1bb6891c003187635c2831b3f0997e83ff7722b8"
+    },
+    {
+      "path": "state/.gitkeep",
+      "sha256": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6"
+    },
+    {
+      "path": "tests/test_standalone.py",
+      "sha256": "419c5765cc57c8cc845b1eb54b24fd82df6c7224414814c73e0c6ae8e514437f"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "schema": "scientist-literature-supplement-fallbacks/v1",
+  "entries": [
+    {
+      "source_url": "https://www.science.org/doi/suppl/10.1126/science.aah4434/suppl_file/ye-sm.pdf",
+      "fallback_url": "https://www.ocf.berkeley.edu/~jode/pdf/874_full_si.pdf",
+      "expected_doi": "10.1126/science.aah4434",
+      "sha256": "6447dca7fc219df8044956140bfad68637fa8eadf44c262ea73f598deaa3bd21",
+      "provenance": "Author-hosted supporting information"
+    }
+  ]
+}

@@ -1,0 +1,122 @@
+{
+  "schema": "scientist-literature-probes/v1",
+  "wait_ms": 5000,
+  "timeout_seconds": 600,
+  "minimum_download_bytes": 4096,
+  "probes": [
+    {
+      "id": "acs-jacs",
+      "publisher_id": "acs",
+      "resource_kind": "article",
+      "minimum_content_chars": 12000,
+      "url": "https://doi.org/10.1021/jacs.5c10092"
+    },
+    {
+      "id": "rsc-article",
+      "publisher_id": "rsc",
+      "resource_kind": "article",
+      "minimum_content_chars": 12000,
+      "url": "https://doi.org/10.1039/C4CC09139F"
+    },
+    {
+      "id": "nature-article",
+      "publisher_id": "nature-springer",
+      "resource_kind": "article",
+      "minimum_content_chars": 12000,
+      "url": "https://doi.org/10.1038/s41586-025-08610-1"
+    },
+    {
+      "id": "sciencedirect-article",
+      "publisher_id": "elsevier",
+      "resource_kind": "article",
+      "minimum_content_chars": 12000,
+      "url": "https://doi.org/10.1016/j.cej.2026.173948"
+    },
+    {
+      "id": "wiley-angewandte",
+      "publisher_id": "wiley",
+      "resource_kind": "article",
+      "minimum_content_chars": 12000,
+      "url": "https://doi.org/10.1002/anie.202411305"
+    },
+    {
+      "id": "springer-article",
+      "publisher_id": "nature-springer",
+      "resource_kind": "article",
+      "minimum_content_chars": 12000,
+      "url": "https://doi.org/10.1007/s41918-025-00252-1"
+    },
+    {
+      "id": "pnas-article",
+      "publisher_id": "pnas",
+      "resource_kind": "article",
+      "minimum_content_chars": 12000,
+      "url": "https://doi.org/10.1073/pnas.2208187119"
+    },
+    {
+      "id": "science-article",
+      "publisher_id": "science",
+      "resource_kind": "article",
+      "minimum_content_chars": 12000,
+      "url": "https://doi.org/10.1126/science.aah4434"
+    },
+    {
+      "id": "acs-si",
+      "publisher_id": "acs",
+      "resource_kind": "supplementary_pdf",
+      "minimum_content_chars": 5000,
+      "landing_url_hint": "https://pubs.acs.org/doi/10.1021/jacs.5c10092",
+      "url": "https://pubs.acs.org/jacsat/article-supplement/3737851/pdf/ja5c10092_si_001/"
+    },
+    {
+      "id": "rsc-si",
+      "publisher_id": "rsc",
+      "resource_kind": "supplementary_pdf",
+      "minimum_content_chars": 5000,
+      "url": "https://pubs.rsc.org/sc/article-supplement/869782/pdf/d4sc04909h1_suppl/"
+    },
+    {
+      "id": "nature-si",
+      "publisher_id": "nature-springer",
+      "resource_kind": "supplementary_pdf",
+      "minimum_content_chars": 5000,
+      "url": "https://static-content.springer.com/esm/art%3A10.1038%2Fs41598-021-84310-w/MediaObjects/41598_2021_84310_MOESM4_ESM.pdf"
+    },
+    {
+      "id": "springer-si",
+      "publisher_id": "nature-springer",
+      "resource_kind": "supplementary_pdf",
+      "minimum_content_chars": 5000,
+      "landing_url_hint": "https://link.springer.com/article/10.1007/s44371-025-00351-4",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1007%2Fs44371-025-00351-4/MediaObjects/44371_2025_351_MOESM1_ESM.pdf"
+    },
+    {
+      "id": "wiley-si",
+      "publisher_id": "wiley",
+      "resource_kind": "supplementary_pdf",
+      "minimum_content_chars": 5000,
+      "url": "https://onlinelibrary.wiley.com/action/downloadSupplement?doi=10.1002%2Fanie.202411305&file=anie202411305-sup-0001-misc_information.pdf"
+    },
+    {
+      "id": "elsevier-si",
+      "publisher_id": "elsevier",
+      "resource_kind": "supplementary_pdf",
+      "minimum_content_chars": 5000,
+      "url": "https://ars.els-cdn.com/content/image/1-s2.0-S095965262201589X-mmc1.pdf"
+    },
+    {
+      "id": "pnas-si",
+      "publisher_id": "pnas",
+      "resource_kind": "supplementary_pdf",
+      "minimum_content_chars": 5000,
+      "url": "https://www.pnas.org/doi/suppl/10.1073/pnas.2208187119/suppl_file/pnas.2208187119.sapp.pdf"
+    },
+    {
+      "id": "science-si",
+      "publisher_id": "science",
+      "resource_kind": "supplementary_pdf",
+      "minimum_content_chars": 5000,
+      "url": "https://www.science.org/doi/suppl/10.1126/science.aah4434/suppl_file/ye-sm.pdf"
+    }
+  ]
+}

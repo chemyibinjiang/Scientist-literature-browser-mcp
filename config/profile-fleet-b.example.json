@@ -1,0 +1,26 @@
+{
+  "schema": "scientist_literature_profile_fleet_config/v1",
+  "enabled": false,
+  "probes_path": "probes.json",
+  "browser_ids": "browser-025..browser-048",
+  "active_slots": 4,
+  "replacement_enabled": false,
+  "replacement_min_slots": 1,
+  "replacement_max_slots": 1,
+  "idle_check_seconds": 1800,
+  "poll_seconds": 5,
+  "timeout_seconds": 240,
+  "wait_ms": 5000,
+  "retry_seconds": 300,
+  "recoverable_failure_threshold": 4,
+  "improvement_margin": 1,
+  "publisher_limits": {
+    "acs": 1,
+    "rsc": 1,
+    "nature-springer": 1,
+    "elsevier": 1,
+    "wiley": 1,
+    "pnas": 1,
+    "science": 1
+  }
+}

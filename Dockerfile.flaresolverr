@@ -1,0 +1,7 @@
+FROM ghcr.io/flaresolverr/flaresolverr@sha256:139dfee1c6f89249c8d665d1333a42e8ec74ec0a86bc6bb1c8461e10d3a66a47
+
+USER root
+COPY deploy/flaresolverr/patch_v350_turnstile_stale.py /tmp/
+RUN python3 /tmp/patch_v350_turnstile_stale.py \
+    && rm -f /tmp/patch_v350_turnstile_stale.py
+USER flaresolverr

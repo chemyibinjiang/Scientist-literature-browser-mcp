@@ -1,0 +1,222 @@
+name: scientist-literature-cluster
+
+x-literature-no-proxy: &literature-no-proxy ${LITERATURE_NO_PROXY:-localhost,127.0.0.1,pool,browser-engine-a,browser-engine-b,flaresolverr-a1,flaresolverr-a2,flaresolverr-a3,flaresolverr-a4,flaresolverr-a5,flaresolverr-a6,flaresolverr-b1,flaresolverr-b2,flaresolverr-b3,flaresolverr-b4,flaresolverr-b5,flaresolverr-b6}
+
+x-flaresolverr-service: &flaresolverr-service
+  build:
+    context: .
+    dockerfile: Dockerfile.flaresolverr
+  image: ${LITERATURE_FLARESOLVERR_IMAGE:-scientist-literature-flaresolverr:local}
+  environment:
+    NO_PROXY: *literature-no-proxy
+    no_proxy: *literature-no-proxy
+    LOG_LEVEL: info
+    LOG_HTML: "false"
+    CAPTCHA_SOLVER: none
+    TZ: ${TZ:-Asia/Shanghai}
+    LANG: en_US
+  expose:
+    - "8191"
+  shm_size: 1g
+  mem_limit: ${LITERATURE_FLARESOLVERR_MEMORY_LIMIT:-2g}
+  cpus: ${LITERATURE_FLARESOLVERR_CPUS:-2.0}
+  cap_drop:
+    - ALL
+  security_opt:
+    - no-new-privileges:true
+  healthcheck:
+    test: ["CMD", "curl", "-fsS", "http://127.0.0.1:8191/"]
+    interval: 30s
+    timeout: 10s
+    retries: 3
+    start_period: 30s
+  restart: unless-stopped
+
+x-engine-environment: &engine-environment
+  NO_PROXY: *literature-no-proxy
+  no_proxy: *literature-no-proxy
+  LANG: C.UTF-8
+  LC_ALL: C.UTF-8
+  PYTHONUTF8: "1"
+  TZ: ${TZ:-Asia/Shanghai}
+  LITERATURE_PUBLISHER_POLICY: /config/publishers.json
+  LITERATURE_SUPPLEMENT_FALLBACKS: /config/supplementary-fallbacks.json
+  LITERATURE_ENGINE_HOST: 0.0.0.0
+  LITERATURE_ENGINE_PORT: 9020
+  LITERATURE_ENGINE_PROFILE_COUNT: ${LITERATURE_ENGINE_SHARD_PROFILE_COUNT:-24}
+  LITERATURE_ENGINE_MAX_RESIDENT: ${LITERATURE_ENGINE_SHARD_MAX_RESIDENT:-24}
+  LITERATURE_ENGINE_IDLE_SECONDS: ${LITERATURE_ENGINE_IDLE_SECONDS:-1800}
+  LITERATURE_ENGINE_PROFILE_ROOT: /browser-profiles
+  LITERATURE_ENGINE_ADMIN_TOKEN_FILE: /run/secrets/literature-engine/admin-token
+  LITERATURE_BROWSER_CHROMIUM: /usr/bin/chromium
+  LITERATURE_BROWSER_SCREEN: 1440x1000x24
+  LITERATURE_BROWSER_MAX_OPEN_PAGES: ${LITERATURE_BROWSER_MAX_OPEN_PAGES:-2}
+  LITERATURE_BROWSER_MAX_PENDING_READS: ${LITERATURE_BROWSER_MAX_PENDING_READS:-2}
+  LITERATURE_BROWSER_READ_BUDGET_SECONDS: ${LITERATURE_BROWSER_READ_BUDGET_SECONDS:-600}
+  LITERATURE_BROWSER_STALL_GRACE_SECONDS: ${LITERATURE_BROWSER_STALL_GRACE_SECONDS:-30}
+  LITERATURE_BROWSER_MAX_PDF_BYTES: ${LITERATURE_BROWSER_MAX_PDF_BYTES:-67108864}
+  LITERATURE_BROWSER_PDF_FETCH_TIMEOUT_MS: ${LITERATURE_BROWSER_PDF_FETCH_TIMEOUT_MS:-240000}
+  LITERATURE_BROWSER_RENDERER_PROCESS_LIMIT: ${LITERATURE_BROWSER_RENDERER_PROCESS_LIMIT:-4}
+  LITERATURE_BROWSER_MAX_CHARS: 0
+  LITERATURE_BROWSER_WAIT_MS: 5000
+  LITERATURE_FLARESOLVERR_MAX_TIMEOUT_MS: 240000
+  LITERATURE_FLARESOLVERR_WAIT_SECONDS: 3
+  LITERATURE_FLARESOLVERR_ATTEMPT_TIMEOUT_MS: ${LITERATURE_FLARESOLVERR_ATTEMPT_TIMEOUT_MS:-240000}
+  LITERATURE_FLARESOLVERR_MAX_CONCURRENT: 1
+  LITERATURE_FLARESOLVERR_QUEUE_SECONDS: ${LITERATURE_FLARESOLVERR_QUEUE_SECONDS:-300}
+  LITERATURE_FLARESOLVERR_MAINTENANCE_MAX_TIMEOUT_MS: ${LITERATURE_FLARESOLVERR_MAINTENANCE_MAX_TIMEOUT_MS:-180000}
+  LITERATURE_ELSEVIER_API_KEY: ${LITERATURE_ELSEVIER_API_KEY:-}
+  LITERATURE_ELSEVIER_INSTTOKEN: ${LITERATURE_ELSEVIER_INSTTOKEN:-}
+  LITERATURE_ELSEVIER_API_TIMEOUT_SECONDS: ${LITERATURE_ELSEVIER_API_TIMEOUT_SECONDS:-30}
+
+x-engine-service: &engine-service
+  build:
+    context: .
+    dockerfile: Dockerfile.engine
+  image: ${LITERATURE_ENGINE_IMAGE:-scientist-literature-engine:local}
+  group_add:
+    - "${LITERATURE_PRIVATE_GROUP_ID:-1000}"
+  tmpfs:
+    - /tmp:mode=1777,uid=10001,gid=10001,size=4294967296
+  expose:
+    - "9020"
+  read_only: true
+  shm_size: ${LITERATURE_ENGINE_SHARD_SHM_SIZE:-8g}
+  mem_limit: ${LITERATURE_ENGINE_SHARD_MEMORY_LIMIT:-80g}
+  cpus: ${LITERATURE_ENGINE_SHARD_CPUS:-24.0}
+  pids_limit: ${LITERATURE_ENGINE_SHARD_PIDS_LIMIT:-16384}
+  cap_drop:
+    - ALL
+  security_opt:
+    - no-new-privileges:true
+  healthcheck:
+    test: ["CMD", "python3", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:9020/ready', timeout=5).read()"]
+    interval: 30s
+    timeout: 10s
+    retries: 3
+    start_period: 30s
+  restart: unless-stopped
+
+services:
+  flaresolverr-a1: {<<: *flaresolverr-service}
+  flaresolverr-a2: {<<: *flaresolverr-service}
+  flaresolverr-a3: {<<: *flaresolverr-service}
+  flaresolverr-a4: {<<: *flaresolverr-service}
+  flaresolverr-a5: {<<: *flaresolverr-service}
+  flaresolverr-a6: {<<: *flaresolverr-service}
+  flaresolverr-b1: {<<: *flaresolverr-service}
+  flaresolverr-b2: {<<: *flaresolverr-service}
+  flaresolverr-b3: {<<: *flaresolverr-service}
+  flaresolverr-b4: {<<: *flaresolverr-service}
+  flaresolverr-b5: {<<: *flaresolverr-service}
+  flaresolverr-b6: {<<: *flaresolverr-service}
+
+  browser-engine-a:
+    <<: *engine-service
+    environment:
+      <<: *engine-environment
+      LITERATURE_ENGINE_PROFILE_OFFSET: 0
+      LITERATURE_FLARESOLVERR_URLS: http://flaresolverr-a1:8191/v1,http://flaresolverr-a2:8191/v1,http://flaresolverr-a3:8191/v1,http://flaresolverr-a4:8191/v1,http://flaresolverr-a5:8191/v1,http://flaresolverr-a6:8191/v1
+    volumes:
+      - ${LITERATURE_DATA_ROOT:-/data/scientist/literature}/profiles:/browser-profiles
+      - ./config/publishers.json:/config/publishers.json:ro
+      - ./config/supplementary-fallbacks.json:/config/supplementary-fallbacks.json:ro
+      - ${LITERATURE_PRIVATE_ROOT:-/data/scientist/literature/private}:/run/secrets/literature-engine:ro
+    depends_on:
+      flaresolverr-a1: {condition: service_healthy}
+      flaresolverr-a2: {condition: service_healthy}
+      flaresolverr-a3: {condition: service_healthy}
+      flaresolverr-a4: {condition: service_healthy}
+      flaresolverr-a5: {condition: service_healthy}
+      flaresolverr-a6: {condition: service_healthy}
+
+  browser-engine-b:
+    <<: *engine-service
+    environment:
+      <<: *engine-environment
+      LITERATURE_ENGINE_PROFILE_OFFSET: 24
+      LITERATURE_FLARESOLVERR_URLS: http://flaresolverr-b1:8191/v1,http://flaresolverr-b2:8191/v1,http://flaresolverr-b3:8191/v1,http://flaresolverr-b4:8191/v1,http://flaresolverr-b5:8191/v1,http://flaresolverr-b6:8191/v1
+    volumes:
+      - ${LITERATURE_DATA_ROOT:-/data/scientist/literature}/profiles-b:/browser-profiles
+      - ./config/publishers.json:/config/publishers.json:ro
+      - ./config/supplementary-fallbacks.json:/config/supplementary-fallbacks.json:ro
+      - ${LITERATURE_PRIVATE_ROOT:-/data/scientist/literature/private}:/run/secrets/literature-engine:ro
+    depends_on:
+      flaresolverr-b1: {condition: service_healthy}
+      flaresolverr-b2: {condition: service_healthy}
+      flaresolverr-b3: {condition: service_healthy}
+      flaresolverr-b4: {condition: service_healthy}
+      flaresolverr-b5: {condition: service_healthy}
+      flaresolverr-b6: {condition: service_healthy}
+
+  pool:
+    build:
+      context: .
+      dockerfile: Dockerfile.mcp
+    image: ${LITERATURE_MCP_IMAGE:-scientist-literature-mcp:local}
+    command: ["python3", "-m", "scientist_literature_mcp.browser_pool"]
+    environment:
+      NO_PROXY: *literature-no-proxy
+      no_proxy: *literature-no-proxy
+      LANG: C.UTF-8
+      LC_ALL: C.UTF-8
+      PYTHONUTF8: "1"
+      TZ: ${TZ:-Asia/Shanghai}
+      LITERATURE_POOL_HOST: 0.0.0.0
+      LITERATURE_POOL_PORT: 9030
+      LITERATURE_BROWSER_ENGINE_URLS: http://browser-engine-a:9020,http://browser-engine-b:9020
+      LITERATURE_POOL_BROWSER_SHARD_SIZE: 24
+      LITERATURE_POOL_BROWSER_COUNT: ${LITERATURE_POOL_BROWSER_COUNT:-48}
+      LITERATURE_POOL_INITIAL_OPERATOR_LIMIT: ${LITERATURE_POOL_OPERATOR_LIMIT:-48}
+      LITERATURE_POOL_LOGICAL_REQUEST_CAPACITY: ${LITERATURE_POOL_LOGICAL_REQUEST_CAPACITY:-120}
+      LITERATURE_POOL_DEFAULT_TIMEOUT_SECONDS: 600
+      LITERATURE_POOL_MAX_TIMEOUT_SECONDS: 600
+      LITERATURE_POOL_BACKEND_COOLDOWN_SECONDS: ${LITERATURE_POOL_BACKEND_COOLDOWN_SECONDS:-30}
+      LITERATURE_POOL_BACKEND_REPAIR_TIMEOUT_SECONDS: 90
+      LITERATURE_POOL_RSC_WARM_BROWSER_IDS: ${LITERATURE_POOL_RSC_WARM_BROWSER_IDS:-}
+      LITERATURE_POOL_AFFINITY_WARM_LEASE_SECONDS: ${LITERATURE_POOL_AFFINITY_WARM_LEASE_SECONDS:-1800}
+      LITERATURE_POOL_PUBLISHER_STATE_FILE: /var/lib/scientist-literature-pool/publisher-capabilities.json
+      LITERATURE_ENGINE_ADMIN_TOKEN_FILE: /run/secrets/literature-engine/admin-token
+      LITERATURE_POOL_ADMIN_TOKEN_FILE: /run/secrets/literature-engine/admin-token
+      LITERATURE_MEMORY_NORMAL_BROWSER_COUNT: ${LITERATURE_MEMORY_NORMAL_BROWSER_COUNT:-48}
+      LITERATURE_MEMORY_GUARDED_BROWSER_COUNT: ${LITERATURE_MEMORY_GUARDED_BROWSER_COUNT:-40}
+      LITERATURE_MEMORY_CONSTRAINED_BROWSER_COUNT: ${LITERATURE_MEMORY_CONSTRAINED_BROWSER_COUNT:-24}
+      LITERATURE_MEMORY_CRITICAL_BROWSER_COUNT: ${LITERATURE_MEMORY_CRITICAL_BROWSER_COUNT:-8}
+      LITERATURE_MEMORY_GUARDED_AVAILABLE_BYTES: ${LITERATURE_MEMORY_GUARDED_AVAILABLE_BYTES:-103079215104}
+      LITERATURE_MEMORY_CONSTRAINED_AVAILABLE_BYTES: ${LITERATURE_MEMORY_CONSTRAINED_AVAILABLE_BYTES:-68719476736}
+      LITERATURE_MEMORY_CRITICAL_AVAILABLE_BYTES: ${LITERATURE_MEMORY_CRITICAL_AVAILABLE_BYTES:-34359738368}
+      LITERATURE_MEMORY_GUARDED_AVAILABLE_RATIO: ${LITERATURE_MEMORY_GUARDED_AVAILABLE_RATIO:-0.40}
+      LITERATURE_MEMORY_CONSTRAINED_AVAILABLE_RATIO: ${LITERATURE_MEMORY_CONSTRAINED_AVAILABLE_RATIO:-0.28}
+      LITERATURE_MEMORY_CRITICAL_AVAILABLE_RATIO: ${LITERATURE_MEMORY_CRITICAL_AVAILABLE_RATIO:-0.16}
+    volumes:
+      - ${LITERATURE_PRIVATE_ROOT:-/data/scientist/literature/private}:/run/secrets/literature-engine:ro
+      - ${LITERATURE_DATA_ROOT:-/data/scientist/literature}/pool-state:/var/lib/scientist-literature-pool
+    group_add:
+      - "${LITERATURE_PRIVATE_GROUP_ID:-1000}"
+    ports:
+      - "${LITERATURE_POOL_BIND_ADDRESS:-127.0.0.1}:${LITERATURE_POOL_HOST_PORT:-19030}:9030"
+    read_only: true
+    tmpfs:
+      - /tmp:mode=1777,uid=10002,gid=10002,size=134217728
+    mem_limit: 1g
+    cpus: 2.0
+    pids_limit: 512
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    healthcheck:
+      test: ["CMD", "python3", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:9030/ready', timeout=5).read()"]
+      interval: 15s
+      timeout: 5s
+      retries: 4
+      start_period: 30s
+    depends_on:
+      browser-engine-a: {condition: service_healthy}
+      browser-engine-b: {condition: service_healthy}
+    restart: unless-stopped
+
+networks:
+  default:
+    name: scientist-literature-private
+    internal: false

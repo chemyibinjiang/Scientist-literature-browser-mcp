@@ -1,0 +1,55 @@
+{
+  "schema": "literature_browser_profile_patrol_config/v1",
+  "enabled": true,
+  "lane_count": 2,
+  "lease_hours": 0.25,
+  "cycle_deadline_hours": 0.25,
+  "cycle_warning_minutes": 5,
+  "profile_repair_workers": 2,
+  "publisher_maintainers": 1,
+  "verification_slots": 2,
+  "retry_seconds": 120,
+  "idle_poll_seconds": 10,
+  "timeout_seconds": 150,
+  "wait_ms": 8000,
+  "browser_ids": "browser-041..browser-048",
+  "probes": [
+    {
+      "id": "rsc-article",
+      "publisher_id": "rsc",
+      "publisher": "RSC Publishing",
+      "resource_kind": "article",
+      "browser_ids": "browser-041..browser-048",
+      "minimum_content_chars": 12000,
+      "landing_url_hint": "https://pubs.rsc.org/cc/article/51/13/2577/429186/Surfactant-free-Pd-nanoparticles-immobilized-to-a",
+      "url": "https://pubs.rsc.org/cc/article/51/13/2577/429186/Surfactant-free-Pd-nanoparticles-immobilized-to-a"
+    },
+    {
+      "id": "rsc-si",
+      "publisher_id": "rsc",
+      "publisher": "RSC supporting information",
+      "resource_kind": "supplementary_pdf",
+      "browser_ids": "browser-041..browser-048",
+      "minimum_download_bytes": 4096,
+      "landing_url_hint": "https://pubs.rsc.org/en/content/articlelanding/2024/sc/d4sc04909h",
+      "url": "https://pubs.rsc.org/sc/article-supplement/869782/pdf/d4sc04909h1_suppl/"
+    }
+  ],
+  "session_refreshes": [
+    {
+      "id": "rsc-article-session",
+      "publisher_id": "rsc",
+      "publisher": "RSC article session refresh",
+      "resource_kind": "article",
+      "browser_ids": "browser-041..browser-048",
+      "interval_seconds": 600,
+      "retry_seconds": 120,
+      "timeout_seconds": 150,
+      "wait_ms": 8000,
+      "max_chars": 1000,
+      "minimum_content_chars": 1000,
+      "landing_url_hint": "https://pubs.rsc.org/cc/article/51/13/2577/429186/Surfactant-free-Pd-nanoparticles-immobilized-to-a",
+      "url": "https://pubs.rsc.org/cc/article/51/13/2577/429186/Surfactant-free-Pd-nanoparticles-immobilized-to-a"
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+[Unit]
+Description=Scientist literature profile qualification fleet shard %i
+Requires=scientist-literature-cluster.service
+After=scientist-literature-cluster.service
+
+[Service]
+Type=simple
+User=scientist-literature
+Group=scientist-literature
+EnvironmentFile=/etc/scientist-literature/cluster.env
+StateDirectory=scientist-literature-profile-fleet-%i
+StateDirectoryMode=0750
+Environment=PYTHONPATH=/opt/scientist-literature/current/src
+Environment=SCIENTIST_LITERATURE_POOL_ADMIN_TOKEN_FILE=/data/scientist/literature/private/admin-token
+WorkingDirectory=/opt/scientist-literature/current
+ExecStart=/usr/bin/python3 -m scientist_literature_mcp.maintenance.profile_fleet --config /etc/scientist-literature/profile-fleet-%i.json --database /var/lib/scientist-literature-profile-fleet-%i/fleet.sqlite3 --summary /var/lib/scientist-literature-profile-fleet-%i/latest.json
+Restart=always
+RestartSec=15
+Nice=5
+IOSchedulingClass=best-effort
+IOSchedulingPriority=5
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=strict
+ReadOnlyPaths=/opt/scientist-literature/current /etc/scientist-literature /data/scientist/literature/private
+ReadWritePaths=/var/lib/scientist-literature-profile-fleet-%i
+TimeoutStopSec=900
+
+[Install]
+WantedBy=multi-user.target

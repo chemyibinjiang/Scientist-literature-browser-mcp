@@ -1,0 +1,31 @@
+[Unit]
+Description=Scientist RSC profile keep-warm lane %i
+Requires=scientist-literature-cluster.service
+After=scientist-literature-cluster.service
+
+[Service]
+Type=simple
+User=scientist-literature
+Group=scientist-literature
+EnvironmentFile=/etc/scientist-literature/cluster.env
+StateDirectory=scientist-literature-rsc-keep-warm
+StateDirectoryMode=0750
+Environment=PYTHONPATH=/opt/scientist-literature/current/src
+Environment=SCIENTIST_LITERATURE_POOL_ADMIN_TOKEN_FILE=/data/scientist/literature/private/admin-token
+WorkingDirectory=/opt/scientist-literature/current
+ExecStart=/usr/bin/python3 -m scientist_literature_mcp.maintenance.profile_patrol --config /etc/scientist-literature/rsc-keep-warm.json --state /var/lib/scientist-literature-rsc-keep-warm/state.json --merged-state /var/lib/scientist-literature-rsc-keep-warm/merged.json --lane %i --lanes 2
+Restart=always
+RestartSec=15
+Nice=10
+IOSchedulingClass=best-effort
+IOSchedulingPriority=6
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=strict
+ReadOnlyPaths=/opt/scientist-literature/current /etc/scientist-literature /data/scientist/literature/private
+ReadWritePaths=/var/lib/scientist-literature-rsc-keep-warm
+TimeoutStopSec=30
+
+[Install]
+WantedBy=multi-user.target

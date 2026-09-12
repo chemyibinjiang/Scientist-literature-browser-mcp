@@ -1,0 +1,8 @@
+# Put the API key in SCIENTIST_RESEARCH_API_KEY. Never place it in this file.
+[mcp_servers.scientist_research]
+url = "https://scientist.example.edu:8318/mcp/research"
+bearer_token_env_var = "SCIENTIST_RESEARCH_API_KEY"
+startup_timeout_sec = 30
+tool_timeout_sec = 720
+enabled = true
+required = false

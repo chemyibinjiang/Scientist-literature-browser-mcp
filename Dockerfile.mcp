@@ -1,0 +1,19 @@
+FROM python:3.11-slim-bookworm
+
+ENV LANG=C.UTF-8 \
+    LC_ALL=C.UTF-8 \
+    PYTHONUTF8=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1
+
+RUN useradd --uid 10002 --create-home --shell /usr/sbin/nologin mcp \
+    && install -d -o mcp -g mcp /var/lib/scientist-literature-pool
+
+WORKDIR /app
+COPY pyproject.toml README.md /app/
+COPY src /app/src
+RUN python3 -m pip install --no-cache-dir .
+
+USER mcp
+
+CMD ["python3", "-m", "scientist_literature_mcp.server"]

@@ -1,0 +1,14 @@
+[Unit]
+Description=Restrict the Scientist literature data plane to its control-plane host
+Requires=docker.service
+After=docker.service network-online.target
+Before=scientist-literature-cluster.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+EnvironmentFile=/etc/scientist-literature/firewall.env
+ExecStart=/opt/scientist-literature/current/deploy/scientist-literature-firewall.sh
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,8 @@
+{
+  "schema": "scientist-research-gateway-keys/v1",
+  "keys": [],
+  "audit": {
+    "enabled": true,
+    "retain_days": 365
+  }
+}
